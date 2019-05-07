@@ -1,0 +1,125 @@
+{
+    "title": "AWS Elemental MediaStore Data Plane",
+    "description": "An AWS Elemental MediaStore asset is an object, similar to an object in the Amazon S3 service. Objects are the fundamental entities that are stored in AWS Elemental MediaStore.",
+    "docsUrl": "https://docs.aws.amazon.com/mediastore/",
+    "url": "https://api.apis.guru/v2/specs/amazonaws.com/mediastore-data/2017-09-01/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://data.mediastore.amazonaws.com/",
+                    "http://data.mediastore.amazonaws.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "hmac": {
+                "label": "Authorization (hmac)",
+                "viewClass": "TextFieldView",
+                "note": "Amazon Signature authorization v4"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "ListItems": {
+            "main": "./lib/actions/ListItems.js",
+            "title": "Provides a list of metadata entries about folders and objects in the specified folder.",
+            "description": "Provides a list of metadata entries about folders and objects in the specified folder.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ListItems.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeleteObject": {
+            "main": "./lib/actions/DeleteObject.js",
+            "title": "Deletes an object at the specified path.",
+            "description": "Deletes an object at the specified path.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeleteObject.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GetObject": {
+            "main": "./lib/actions/GetObject.js",
+            "title": "Downloads the object at the specified path.",
+            "description": "Downloads the object at the specified path.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GetObject.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DescribeObject": {
+            "main": "./lib/actions/DescribeObject.js",
+            "title": "Gets the headers for an object at the specified path.",
+            "description": "Gets the headers for an object at the specified path.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DescribeObject.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "PutObject": {
+            "main": "./lib/actions/PutObject.js",
+            "title": "Uploads an object to the specified path. Object sizes are limited to 25 MB.",
+            "description": "Uploads an object to the specified path. Object sizes are limited to 25 MB.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/PutObject.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
